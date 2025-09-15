@@ -4,11 +4,11 @@
     <title>Blikomøya AR – 2D-look Video</title>
     <!-- A-Frame -->
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <!-- AR.js med NFT image tracking -->
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar-nft.js"></script>
+    <!-- AR.js -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
     <script>
-      // Video handler: spiller når markøren oppdages, pause når forsvinner
+      // Video handler: starter når markøren oppdages, pause når den forsvinner
       AFRAME.registerComponent("videohandler", {
         init: function () {
           var marker = this.el;
@@ -30,7 +30,7 @@
     <a-scene
       embedded
       vr-mode-ui="enabled: false"
-      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+      arjs="sourceType: webcam; debugUIEnabled: false;"
     >
       <!-- Video asset -->
       <a-assets>
@@ -45,17 +45,17 @@
         ></video>
       </a-assets>
 
-      <!-- NFT Image Tracker -->
-      <a-nft
-        type="nft"
-        url="assets/blikomoya"  <!-- Her peker du til f.eks blikomoya.iset, fset, fset3 -->
+      <!-- Pattern Marker -->
+      <a-marker
+        type="pattern"
+        url="assets/marker.patt"
+        videohandler
         smooth="true"
         smoothCount="10"
         smoothTolerance="0.01"
         smoothThreshold="5"
-        videohandler
       >
-        <!-- Video lagt som flat plane, 2D-look -->
+        <!-- Video som flat plane (2D-look) -->
         <a-plane
           src="#vid"
           width="1"
@@ -64,7 +64,7 @@
           rotation="0 0 0"
           material="shader: flat;"
         ></a-plane>
-      </a-nft>
+      </a-marker>
 
       <a-entity camera></a-entity>
     </a-scene>
