@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Blikomøya AR – 2D-look Video</title>
+    <title>Blikomøya AR – Pinned Video</title>
     <!-- A-Frame -->
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <!-- AR.js -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
     <script>
-      // Video handler: starter når markøren oppdages, pause når den forsvinner
+      // Komponent for å starte/pause video når markøren vises/forsvinner
       AFRAME.registerComponent("videohandler", {
         init: function () {
           var marker = this.el;
@@ -49,13 +49,13 @@
       <a-marker
         type="pattern"
         url="assets/marker.patt"
-        videohandler
         smooth="true"
         smoothCount="10"
         smoothTolerance="0.01"
         smoothThreshold="5"
+        videohandler
       >
-        <!-- Video som flat plane (2D-look) -->
+        <!-- Video plane, pinned til markøren, 2D-look -->
         <a-plane
           src="#vid"
           width="1"
@@ -66,6 +66,7 @@
         ></a-plane>
       </a-marker>
 
+      <!-- Kamera -->
       <a-entity camera></a-entity>
     </a-scene>
   </body>
